@@ -61,12 +61,35 @@
 		<script>
 			(function() {
 				const sites = Array.from(document.querySelectorAll('ol#icons li a'));
+				const ids = Array.from(document.querySelectorAll('ol#icons li')).map(li => li.id.toLowerCase());
 				let currentIndex = 0;
 				
-				// Check for hash navigation (coming from a member site)
+				// Check for query params (from member sites with prev/next buttons)
+				const params = new URLSearchParams(window.location.search);
+				const from = params.get('from')?.toLowerCase();
+				const dir = params.get('dir');
+				
+				if (from && dir) {
+					const index = ids.findIndex(id => from.includes(id) || id.includes(from));
+					if (index >= 0) {
+						let targetIndex;
+						if (dir === 'prev') {
+							targetIndex = ((index - 1) + sites.length) % sites.length;
+						} else if (dir === 'next') {
+							targetIndex = (index + 1) % sites.length;
+						} else if (dir === 'random') {
+							targetIndex = Math.floor(Math.random() * sites.length);
+						}
+						if (targetIndex !== undefined) {
+							window.location.href = sites[targetIndex].href;
+							return;
+						}
+					}
+				}
+				
+				// Check for hash navigation
 				const hash = window.location.hash.replace('#', '').trim().toLowerCase();
 				if (hash) {
-					const ids = sites.map((_, i) => document.querySelectorAll('ol#icons li')[i].id.toLowerCase());
 					const index = ids.findIndex(id => hash.includes(id) || id.includes(hash));
 					if (index >= 0) currentIndex = index;
 				}
