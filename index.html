@@ -9,11 +9,12 @@
 		<script>
 			// Instant redirect for prev/next navigation (runs before page renders)
 			(function() {
-			const sites = [
-				{ id: 'lyyeric', url: 'https://lyyeric.tech' },
-				{ id: 'tomasohCHOM', url: 'https://chom.vercel.app' },
-				{ id: 'markgdev', url: 'https://markgarcia.dev' },
-			];
+				const sites = [
+					{ id: 'lyyeric', url: 'https://lyyeric.tech' },
+					{ id: 'tomasohCHOM', url: 'https://chom.vercel.app' },
+					{ id: 'timothyouu', url: 'https://timothyou.dev' },
+					{ id: 'markgdev', url: 'https://markgarcia.dev' },
+				];
 				
 				const params = new URLSearchParams(window.location.search);
 				const from = params.get('from')?.toLowerCase();
@@ -48,6 +49,9 @@
 			<li data-lang="en" id="tomasohCHOM">
 				<a href="https://chom.vercel.app">chom.vercel.app</a>
 			</li>
+			<li data-lang="en" id="timothyouu">
+				<a href="https://timothyou.dev">timothyou.dev</a>
+      </li>
 			<li data-lang="en" id="markgdev">
 				<a href="https://markgarcia.dev">markgarcia.dev</a>
 			</li>
