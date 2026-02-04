@@ -21,7 +21,7 @@
 				const dir = params.get('dir');
 				
 				if (from && dir) {
-					const index = sites.findIndex(s => from.includes(s.id) || s.id.includes(from));
+					const index = sites.findIndex(s => from.includes(s.id.toLowerCase()) || s.id.toLowerCase().includes(from));
 					if (index >= 0) {
 						let targetIndex;
 						if (dir === 'prev') targetIndex = ((index - 1) + sites.length) % sites.length;
