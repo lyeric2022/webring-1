@@ -61,10 +61,8 @@
 				A webring for CSUF ACM friends. Share your personal sites, portfolios, and projects!
 			</p>
 			<p>
-				Want to join? <a href="https://github.com/lyeric2022/webring-1" target="_blank">Submit a pull request</a>.<br />
-				<a href="#icons">Show icons</a> | <a href="#rss">Show rss</a><span class="hide"> | <a href="#">Hide Feeds</a></span>
+				Want to join? <a href="https://github.com/lyeric2022/webring-1" target="_blank">Submit a pull request</a>.
 			</p>
-			<img id="icon" src="icon.black.large.svg" alt="icon" width="300" height="300">
 		</footer>
 		<style>
 			:root { --color-alpha: white; --color-beta: black; }
@@ -79,58 +77,18 @@
 			
 			body > ol { margin: 30px; padding: 0px 30px 30px; display: block; border-bottom: 2px solid var(--color-beta); }
 			body > ol > li { padding: 5px 0; }
-			body > ol > li img { display: none; margin: 5px; max-width: 88px; height: auto; font-style: italic; overflow: hidden; }
-			body > ol > li a.rss { display: none; }
-			body > ol > li a:visited:before, body > ol > li a:visited:after { color: var(--color-alpha); }
 			body > footer { margin: 30px; }
 			body > footer > p { max-width: 600px; }
-			body > footer > p span.hide { display: none; }
-			body > footer > img { display: inline-block; width: 100px; height: auto; margin-bottom: 30px; }
-			html:target li a.rss { background: var(--color-beta); color: var(--color-alpha); display: inline; }
-			body:target > footer > p > span.hide, html:target footer > p > span.hide { display: inline; }
-			#icons:target img, #icons:target picture { display: block; }
-			body > ol > li:target a { color: var(--color-alpha); }
-			body > ol > li:target { background: var(--color-beta); }
+			
 			@media (prefers-color-scheme: dark) {
 				:root { --color-alpha: black; --color-beta: white; }
-				#icon { filter: invert(100%); }
 			}
 		</style>
 		<script>
+			// Navigation buttons for the webring page itself
 			(function() {
 				const sites = Array.from(document.querySelectorAll('ol#icons li a'));
-				const ids = Array.from(document.querySelectorAll('ol#icons li')).map(li => li.id.toLowerCase());
 				let currentIndex = 0;
-				
-				// Check for query params (from member sites with prev/next buttons)
-				const params = new URLSearchParams(window.location.search);
-				const from = params.get('from')?.toLowerCase();
-				const dir = params.get('dir');
-				
-				if (from && dir) {
-					const index = ids.findIndex(id => from.includes(id) || id.includes(from));
-					if (index >= 0) {
-						let targetIndex;
-						if (dir === 'prev') {
-							targetIndex = ((index - 1) + sites.length) % sites.length;
-						} else if (dir === 'next') {
-							targetIndex = (index + 1) % sites.length;
-						} else if (dir === 'random') {
-							targetIndex = Math.floor(Math.random() * sites.length);
-						}
-						if (targetIndex !== undefined) {
-							window.location.href = sites[targetIndex].href;
-							return;
-						}
-					}
-				}
-				
-				// Check for hash navigation
-				const hash = window.location.hash.replace('#', '').trim().toLowerCase();
-				if (hash) {
-					const index = ids.findIndex(id => hash.includes(id) || id.includes(hash));
-					if (index >= 0) currentIndex = index;
-				}
 				
 				function goTo(index) {
 					currentIndex = ((index % sites.length) + sites.length) % sites.length;
