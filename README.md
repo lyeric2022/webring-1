@@ -6,7 +6,9 @@ A webring for CSUF ACM friends. Share your personal sites, portfolios, and proje
 
 ## Join the webring
 
-1) Add your website to [index.html](index.html) - add to both the `sites` array (in the head script) and the `<ol>` list:
+### Step 1: Add your site to index.html
+
+Add to both the `sites` array (in the head script) AND the `<ol>` list:
 
 ```html
 <!-- In the head script sites array -->
@@ -18,9 +20,20 @@ A webring for CSUF ACM friends. Share your personal sites, portfolios, and proje
 </li>
 ```
 
-2) Submit a Pull Request!
+### Step 2: Add webring navigation to YOUR site (required!)
 
-3) Add prev/next navigation to your site footer (see [lyyeric.tech](https://lyyeric.tech) for example)
+Add these links to your site's footer so visitors can navigate the ring:
+
+```html
+<a href="https://webring-1.vercel.app/?from=your-name&dir=prev">←</a>
+<a href="https://webring-1.vercel.app/?from=your-name&dir=next">→</a>
+```
+
+Replace `your-name` with your id from Step 1.
+
+See [lyyeric.tech](https://lyyeric.tech) for a live example (scroll to footer).
+
+### Step 3: Submit a Pull Request!
 
 ## Managed by
 
